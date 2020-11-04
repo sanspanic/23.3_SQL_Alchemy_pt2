@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %} Add New User{% endblock %}
+
+{% block content %}
+
+<form action='/users/add' method='POST'>
+  <div class="form-group">
+    <input name='first_name' type="text" class="form-control form-control-sm mt-2" placeholder='first name'>
+    <input name='last_name' type="text" class="form-control form-control-sm mt-2" placeholder='last name'>
+    <input name='img_url' type="text" class="form-control form-control-sm mt-2" placeholder='img url'>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+{% endblock %}
