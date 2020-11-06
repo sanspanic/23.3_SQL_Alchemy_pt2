@@ -100,7 +100,7 @@ def add_new_post(user_id):
     db.session.add(new_post)
     db.session.commit()
 
-    flash(f'Post "{new_post.title}" added.')
+    flash(f"Post '{new_post.title}' added.")
 
     return redirect(f'/users/{user_id}')
 
