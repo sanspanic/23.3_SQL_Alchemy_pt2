@@ -1,6 +1,6 @@
 """seed file to make sample data"""
 
-from models import User, db
+from models import User, Post, db
 from app import app
 
 #create all tables
@@ -21,5 +21,17 @@ db.session.add(rita)
 db.session.add(fergus)
 
 #commit otherwise this won't save
+db.session.commit()
+
+#add blog posts
+f_post_1 = Post(title='1st Post', content='afubewihfb wifbwief weif bwefubweifw', user_id = 3)
+f_post_2 = Post(title='2nd Post', content='afuafebewihfb wifbwief weif bwefubweifw', user_id = 3)
+f_post_3 = Post(title='3rd Post', content='afaaaaubewihfb wifbwief weif bwefubweifw', user_id = 3)
+
+r_post_1 = Post(title='Lalala', content='afaaaaubewihfb wifbwief feweif bwefubweifw', user_id = 2)
+r_post_2 = Post(title='Shalatrala', content='afaaaaubewihfb wifbwigweef weif bwefubweifw', user_id = 2)
+
+#add new objects so session
+db.session.add_all([f_post_1, f_post_2, f_post_3, r_post_1, r_post_2])
 db.session.commit()
 

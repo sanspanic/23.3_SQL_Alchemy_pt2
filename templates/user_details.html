@@ -10,12 +10,39 @@
     </div>
     <div class="col">
         <h1> {{user.first_name}} {{user.last_name}}</h1>
-        <a href="/users/{{user.id}}/edit" class='btn btn-warning'>Edit</a>
-        <form action="/users/{{user.id}}/delete" method='POST'>
-            <button type='submit' class='btn btn-danger'>Delete</button>
-        </form>
-    </div>
+        <div class="row">
+            <div class="col">
+                <a href="/users/{{user.id}}/edit" class='btn btn-warning'>Edit</a>
+                <form class='d-inline' action="/users/{{user.id}}/delete" method='POST'>
+                    <button type='submit' class='btn btn-danger'>Delete</button>
+                </form>
+            </div>
+        </div>
 
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+
+            <div class='mt-2'>
+                {% for msg in messages %}
+                    <p class='flash-success'>{{msg}}</p>
+                {% endfor %}
+            </div>
+
+            {% endif %}
+        {% endwith %}
+
+
+        <div class="row mt-5">
+            <div class="col">
+                    <ul>
+                        {% for post in user.posts %}
+                        <li> <a href="/posts/{{post.id}}">{{post.title}}</a>, Created At: {{post.created_at}}</li>
+                        {% endfor %}
+                    </ul>
+            </div>
+        </div>
+        <a href="/users/{{user.id}}/posts/new" class='btn btn-primary'>Add New</a>
+    </div>
 </div>
 
 {% endblock %}

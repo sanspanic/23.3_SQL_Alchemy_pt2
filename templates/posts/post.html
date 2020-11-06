@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %} {{post.title}} {% endblock %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+
+<div class='mt-2'>
+    {% for msg in messages %}
+        <p class='flash-success'>{{msg}}</p>
+    {% endfor %}
+</div>
+
+{% endif %}
+{% endwith %}
+
+<h1>{{post.title}}</h1>
+<p class='mt-5'>{{post.content}}</p>
+<p>Created By: {{ post.user.full_name }}</p>
+<p>Posted: {{ post.prettified_date }} </p>
+
+<div class="row">
+    <div class="col">
+        <a href="/users/{{post.user.id}}" class='btn btn-outline-secondary'>Back</a>
+        <a href="/posts/{{post.id}}/edit" class='btn btn-warning'>Edit</a>
+        <form class='d-inline' action="/posts/{{post.id}}/delete" method='POST'>
+            <button type='submit' class='btn btn-danger'>Delete</button>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}
