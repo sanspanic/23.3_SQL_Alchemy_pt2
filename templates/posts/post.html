@@ -21,7 +21,7 @@
 <p>Created By: {{ post.user.full_name }}</p>
 <p>Posted: {{ post.prettified_date }} </p>
 
-<div class="row">
+<div class="row mb-2">
     <div class="col">
         <a href="/users/{{post.user.id}}" class='btn btn-outline-secondary'>Back</a>
         <a href="/posts/{{post.id}}/edit" class='btn btn-warning'>Edit</a>
@@ -30,6 +30,19 @@
         </form>
     </div>
 </div>
+
+<div class="row">
+    <div class="col">
+        <h5 class='d-inline'>Tags:</h5> 
+        {% for tag in tags %}
+
+        <a class='badge badge-primary' href="/tags/{{tag.id}}">{{tag.name}}</a>
+
+        {% endfor %}
+    </div>
+</div>
+
+
 
 
 {% endblock %}

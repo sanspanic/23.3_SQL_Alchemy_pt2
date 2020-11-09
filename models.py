@@ -70,6 +70,44 @@ class Post(db.Model):
         date = str(self.created_at)
         date_time_list = date[0:-7].split(' ')
         return f"{date_time_list[0]} at {date_time_list[1]}"
-    
+
+class Tag(db.Model): 
+    """tag model, tags can be added to posts"""
+
+    __tablename__ = 'tags'
+
+    def __repr__(self): 
+        t = self
+        return f"<tag_id = {t.id}, name = {t.name}"
+
+    id = db.Column(db.Integer, 
+                    primary_key = True, 
+                    autoincrement = True)
+
+    name = db.Column(db.String, 
+                    nullable=False, 
+                    unique=True)
+
+    posts = db.relationship('Post', secondary='posts_tags', backref='tags', cascade='all, delete')
+
+class PostTag(db.Model): 
+    """connects posts with tags"""
+
+    __tablename__ = 'posts_tags'
+
+    def __repr__(self): 
+        pt = self
+        return f"<post_tag_id = {pt.id}, post_id = {pt.post_id}, tag_id = {pt.tag_id}"
+
+    post_id = db.Column(db.Integer, 
+                    db.ForeignKey('posts.id'), 
+                    primary_key=True)
+
+    tag_id = db.Column(db.Integer, 
+                db.ForeignKey('tags.id'), 
+                primary_key=True)
+
+        
+
 
 
